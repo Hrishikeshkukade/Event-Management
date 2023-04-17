@@ -11,7 +11,7 @@
     
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 20px;
+    padding-top: 24px;
     padding-bottom: 20px;
     
 }
@@ -115,6 +115,7 @@
     background-color: #4B0082;
     border-radius: 10px;
     height: 200px;
+    padding-top: 20px;
 }
 
 .check{
