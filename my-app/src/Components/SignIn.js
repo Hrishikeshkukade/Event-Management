@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import classes from "./SignIn.module.css";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+
 const SignIn = () => {
-  const [signin, setSignin] = useState(true);
-  
   const [showPassword, setShowPassword] = useState(false);
 
-  const stateChangeHandler = () => {
-    setSignin(!signin);
-  };
-  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -26,12 +22,6 @@ const SignIn = () => {
           </div>
           <div className={classes.allinputs}>
             <form className={classes.form}>
-              
-                <div className={classes.email}>
-                  <h3>Name</h3>
-                  <input placeholder="Enter Name" type="text"></input>
-                </div>
-              
               <div className={classes.email}>
                 <h3>Email</h3>
                 <input placeholder="abc@gmail.com" type="email"></input>
@@ -40,51 +30,30 @@ const SignIn = () => {
                 <h3>Password</h3>
                 <input
                   placeholder="Enter a password..."
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                 ></input>
-                 <FontAwesomeIcon
-        icon={showPassword ?  faEyeSlash  :  faEye}
-         
-        onClick={togglePasswordVisibility}
-        className={classes.icon}
-      />
+                <FontAwesomeIcon
+                  icon={showPassword ? faEyeSlash : faEye}
+                  onClick={togglePasswordVisibility}
+                  className={classes.icon}
+                />
               </div>
-              
-                <div className={classes.password}>
-                  <h3>Confirm Password</h3>
-                  <input
-                    placeholder="Confirm the entered password..."
-                    type="password"
-                  ></input>
-                </div>
-              
-              
-                <div className={classes.password}>
-                  <h3>Mobile Number</h3>
-                  <input
-                    placeholder="Enter the mobile number..."
-                    type="text"
-                  ></input>
-                </div>
-              
-             
-                <div className={classes.text}>
+              <div className={classes.text}>
+                <Link className={classes.link} to="/fp">
                   <h6>Forgot Password</h6>
-                </div>
-              
-              
+                </Link>
+              </div>
             </form>
 
             <div>
-              <button className={classes.button}>
-                {signin ? "Sign-in" : "Register"}
-              </button>
+              <button className={classes.button}>Sign-in</button>
             </div>
             <div className={classes.bottomtext}>
-              <h5>
-                Don't have an account?{" "}
-                <span onClick={stateChangeHandler}>Sign Up</span>
-              </h5>
+              <Link className={classes.link} to="/signup">
+                <h5>
+                  Don't have an account? <span>Sign Up</span>
+                </h5>
+              </Link>
             </div>
           </div>
         </div>

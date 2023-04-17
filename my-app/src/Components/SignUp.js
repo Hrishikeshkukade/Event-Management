@@ -3,11 +3,12 @@ import classes from "./SignUp.module.css";
 import CheckboxWithAnimation from "./Checkbox";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+
 const SignUp = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-
+   
 
     const checkChangeHandler = (e) => {
         setIsChecked(e.target.checked);
@@ -88,12 +89,12 @@ const SignUp = () => {
               </button>
             </div>
             <div className={classes.bottomtext}>
-              <Link to="/signin">
+             <Link className={classes.link} to="/">
               <h5>
                 Already have an account?{" "}
                 <span>Sign In</span>
               </h5>
-              </Link>
+              </Link> 
             </div>
           </div>
         </div>

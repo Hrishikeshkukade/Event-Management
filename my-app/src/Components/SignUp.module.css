@@ -93,7 +93,10 @@
     color: #4B0082;
      font-weight: 100;   
 }
-
+.link{
+    color: #4B0082;
+    text-decoration: none;
+}
 .bottomtext span{
     color: #4B0082;
 }
@@ -110,6 +113,7 @@
 .allinputs{
     background-color: #ffff;
     border-radius: 20px;
+  
 }
 .container{
     background-color: #4B0082;
