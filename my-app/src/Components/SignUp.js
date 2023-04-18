@@ -10,14 +10,77 @@ import Input from "../UI/Input";
 const SignUp = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-   
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [mobileNumber, setMobileNumber] = useState("");
+    const [nameError, setNameError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [confirmPasswordError, setConfirmPasswordError] = useState("");
+    const [mobileNumberError, setMobileNumberError] = useState("");
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
+    
     const checkChangeHandler = (e) => {
         setIsChecked(e.target.checked);
       }
+      const nameChangeHandler = (e) => {
+        setName(e.target.value);
+        setNameError(""); // Resetting the name error
+      };
+    
+      const emailChangeHandler = (e) => {
+        setEmail(e.target.value);
+        setEmailError(""); // Resetting the email error
+        if (!emailRegex.test(email)) {
+          setEmailError("Please enter a valid email address.");
+        }
+      };
+      const passwordChangeHandler = (e) => {
+        setPassword(e.target.value);
+        setPasswordError(""); // Resetting the password error
+      };
+      const confirmPasswordChangeHandler = (e) => {
+        setConfirmPassword(e.target.value);
+        setConfirmPasswordError(""); // Resetting the confirm password error
+      };
+      const mobileNumberChangeHandler = (e) => {
+        setMobileNumber(e.target.value);
+        setMobileNumberError(""); // Resetting the mobile number error
+      };
+      
       const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
       };
+      const registerHandler = (e) => {
+        e.preventDefault();
+
+        if (name.trim() === "") {
+          setNameError("Please enter a name.");
+        }
+        if (email.trim() === "") {
+          setEmailError("Please enter an email.");
+        }
+        if (password.trim() === "") {
+          setPasswordError("Please enter a password.");
+        }
+        if (confirmPassword.trim() === "") {
+          setConfirmPasswordError("Please confirm your password.");
+        }
+        if (mobileNumber.trim() === "") {
+          setMobileNumberError("Please enter a mobile number.");
+        }
+
+
+
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setMobileNumber("");
+      } 
   return (
     <React.Fragment>
       <div className={classes.signin}>
@@ -28,20 +91,24 @@ const SignUp = () => {
             <h5>Create an account so you can create and manage all your events at one place</h5>
           </div>
           <div className={classes.allinputs}>
-            <form className={classes.form}>
+            <form onSubmit={registerHandler} className={classes.form}>
              
                 <div className={classes.email}>
                   <h3>Name</h3>
-                  <Input placeholder="Enter Name" type="text"></Input>
+                  <Input value={name} onChange={nameChangeHandler} placeholder="Enter Name" type="text"></Input>
+                  {nameError && <p className={classes.error}>{nameError}</p>}
                 </div>
               
               <div className={classes.email}>
                 <h3>Email</h3>
-                <Input placeholder="abc@gmail.com" type="email"></Input>
+                <Input value={email} onChange={emailChangeHandler} placeholder="abc@gmail.com" type="email"></Input>
+                {emailError && <p className={classes.error}>{emailError}</p>}
               </div>
               <div className={classes.password}>
                 <h3>Password</h3>
                 <Input
+                  value={password}
+                  onChange={passwordChangeHandler}
                   placeholder="Enter a password..."
                   type={showPassword ? "text" : "password"}
                 ></Input>
@@ -50,11 +117,14 @@ const SignUp = () => {
                   onClick={togglePasswordVisibility}
                   className={classes.icon}
                 />
+                {passwordError && <p className={classes.error}>{passwordError}</p>}
               </div>
                
                 <div className={classes.password}>
                   <h3>Confirm Password</h3>
                   <Input
+                    value={confirmPassword}
+                     onChange={confirmPasswordChangeHandler}
                     placeholder="Confirm the entered password..."
                     type="password"
                   ></Input>
@@ -63,15 +133,19 @@ const SignUp = () => {
                   onClick={togglePasswordVisibility}
                   className={classes.icon}
                 />
+                {confirmPasswordError && <p className={classes.error}>{confirmPasswordError}</p>}
                 </div>
               
              
                 <div className={classes.password}>
                   <h3>Mobile Number</h3>
                   <Input
+                    value={mobileNumber}
+                     onChange={mobileNumberChangeHandler}
                     placeholder="Enter the mobile number..."
                     type="text"
                   ></Input>
+                  {mobileNumberError && <p className={classes.error}>{mobileNumberError}</p>}
                 </div>
               
               
@@ -83,9 +157,9 @@ const SignUp = () => {
                   onChange={checkChangeHandler}
                 />
               
+           <Button>Register</Button>
             </form>
 
-           <Button>Register</Button>
             <div className={classes.bottomtext}>
              <Link className={classes.link} to="/">
               <h5>

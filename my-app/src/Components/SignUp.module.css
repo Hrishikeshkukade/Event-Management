@@ -140,3 +140,9 @@
     color: #FC8EAC;
     margin-right: auto;
 }
+.error{
+    color: #ff3333;
+    /* margin-right: 200px; */
+    display: flex;
+    margin-left: 23px;
+}

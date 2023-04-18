@@ -9,54 +9,48 @@ import Input from "../UI/Input";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [errors, setErrors] = useState({});
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-    setErrors({ ...errors, [name]: "" });
-  };
-  const isValidEmail = (email) => {
-    // Simple email validation using regular expression
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Perform form validation here
-    const newErrors = {};
-
-    if (!formData.email) {
-      newErrors.email = "Please enter an email";
-    } else if (!isValidEmail(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+  const emailChangeHandler = (e) => {
+    setEmail(e.target.value);
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address.");
     }
+  }
+  const passwordChangeHandler = (e) => {
+    setPassword(e.target.value);
+  }
+  // const isValidEmail = (email) => {
+  //   // Simple email validation using regular expression
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   return emailRegex.test(email);
+  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    if (!formData.password) {
-      newErrors.password = "Please enter a password";
+    if (email.trim() === "") {
+      setEmailError("Please enter an email.");
     }
-
-    // Set the new validation errors to state
-    setErrors(newErrors);
-
-    // If there are no errors, submit the form
-    if (Object.keys(newErrors).length === 0) {
-      // Perform form submission here
-      console.log("Form submitted successfully!");
+    if (password.trim() === "") {
+      setPasswordError("Please enter a password.");
     }
-    console.log("clicked");
-  };
+    
+    console.log(email, password)
+    setEmail("");
+    setPassword("");
+  }
+
+
+   
+
+   
  
   return (
     <React.Fragment>
@@ -68,33 +62,33 @@ const SignIn = () => {
             <h5>You can continue to login to manage your events</h5>
           </div>
           <div className={classes.allinputs}>
-            <form  onSubmit={handleSubmit} className={classes.form}>
+            <form onSubmit={handleSubmit} className={classes.form}>
               <div className={classes.email}>
                 <h3>Email</h3>
                 <Input
-                  value={formData.email}
-                  onChange={handleChange}
+                  required
+                  onChange={emailChangeHandler}
                   placeholder="abc@gmail.com"
                   type="email"
+                  value={email}
                 ></Input>
-                {errors.email && <span className={classes.error}>{errors.email}</span>}
+                {emailError && <p className={classes.error}>{emailError}</p>}
               </div>
               <div className={classes.password}>
                 <h3>Password</h3>
                 <Input
-                  value={formData.password}
-                  onChange={handleChange}
+                  onChange={passwordChangeHandler}
                   placeholder="Enter a password..."
                   type={showPassword ? "text" : "password"}
+                  value={password}
                 ></Input>
-                {errors.password && (
-                  <span className={classes.error}>{errors.password}</span>
-                )}
+                
                 <FontAwesomeIcon
                   icon={showPassword ? faEyeSlash : faEye}
                   onClick={togglePasswordVisibility}
                   className={classes.icon}
                 />
+                 {passwordError && <p className={classes.error}>{passwordError}</p>}
               </div>
               <div className={classes.text}>
                 <Link className={classes.link} to="/fp">
