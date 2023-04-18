@@ -144,6 +144,10 @@
     color: #FC8EAC;
     margin-right: auto;
 }
+.error{
+    color: #ff3333;
+    margin-right: 200px;
+}
 @media screen and (max-width: 1283px) {
     .text{
         margin-left: 372px;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Checkbox.css'; // Import the CSS file for the styles
 
+
 const Checkbox = () => {
   const [checked, setChecked] = useState(false);
 

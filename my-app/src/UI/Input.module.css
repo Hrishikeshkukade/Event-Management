@@ -1,0 +1,19 @@
+.input h3{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    margin-left: 25px;
+    color: #4B0082;
+    padding-top: 12px;
+}
+.input input{
+    width: 90%;
+    height: 35px;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #E6E6FA;
+    /* border: 1px solid rgb(102, 4, 102); */
+    border: none;
+    outline: currentColor;
+    color: #909090;
+}

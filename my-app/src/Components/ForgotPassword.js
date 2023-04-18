@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./ForgotPassword.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Button from "../UI/Button";
+import Input from "../UI/Input";
 const ForgotPassword = () => {
   const history = useHistory();
 
@@ -22,7 +23,7 @@ const ForgotPassword = () => {
           <form className={classes.form}>
             <div className={classes.email}>
               <h3>Email</h3>
-              <input placeholder="abc@gmail.com" type="email"></input>
+              <Input placeholder="abc@gmail.com" type="email"></Input>
             </div>
             <Button>Send</Button>
           </form>

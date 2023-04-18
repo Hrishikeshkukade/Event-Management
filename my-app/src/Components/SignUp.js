@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Button from "../UI/Button";
+import Input from "../UI/Input";
 
 const SignUp = () => {
     const [isChecked, setIsChecked] = useState(false);
@@ -31,19 +32,19 @@ const SignUp = () => {
              
                 <div className={classes.email}>
                   <h3>Name</h3>
-                  <input placeholder="Enter Name" type="text"></input>
+                  <Input placeholder="Enter Name" type="text"></Input>
                 </div>
               
               <div className={classes.email}>
                 <h3>Email</h3>
-                <input placeholder="abc@gmail.com" type="email"></input>
+                <Input placeholder="abc@gmail.com" type="email"></Input>
               </div>
               <div className={classes.password}>
                 <h3>Password</h3>
-                <input
+                <Input
                   placeholder="Enter a password..."
                   type={showPassword ? "text" : "password"}
-                ></input>
+                ></Input>
                 <FontAwesomeIcon
                   icon={showPassword ? faEyeSlash : faEye}
                   onClick={togglePasswordVisibility}
@@ -53,10 +54,10 @@ const SignUp = () => {
                
                 <div className={classes.password}>
                   <h3>Confirm Password</h3>
-                  <input
+                  <Input
                     placeholder="Confirm the entered password..."
                     type="password"
-                  ></input>
+                  ></Input>
                    <FontAwesomeIcon
                   icon={showPassword ? faEyeSlash : faEye}
                   onClick={togglePasswordVisibility}
@@ -67,10 +68,10 @@ const SignUp = () => {
              
                 <div className={classes.password}>
                   <h3>Mobile Number</h3>
-                  <input
+                  <Input
                     placeholder="Enter the mobile number..."
                     type="text"
-                  ></input>
+                  ></Input>
                 </div>
               
               
