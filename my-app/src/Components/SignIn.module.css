@@ -70,18 +70,7 @@
     outline: currentColor;
     color: #909090;
 }
-.button{
-    background-color: #4B0082;
-    color: white;
-    width: 51%;
-    height: 40px;
-    border-radius: 10px;
-    border: none;
-    margin-top: 22px;
-}
-.button:hover{
-    cursor: pointer;
-}
+
 .text{
     color: rgb(102, 4, 102);
     margin-left: 362px;

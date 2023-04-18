@@ -1,9 +1,19 @@
 import React from "react";
 import classes from "./ForgotPassword.module.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Button from "../UI/Button";
 const ForgotPassword = () => {
+  const history = useHistory();
+
+  const clickHandler = () => {
+    history.push("/");
+  }
   return (
     <div className={classes.signin}>
       <div className={classes.container}>
+        <div>
+          <button onClick={clickHandler} className={classes.signinbutton}>Sign-In</button>
+        </div>
         <div className={classes.info}>
           <h1>Forgot Password</h1>
           <h5>Enter your registered email below to recieve password reset email</h5>
@@ -14,9 +24,7 @@ const ForgotPassword = () => {
               <h3>Email</h3>
               <input placeholder="abc@gmail.com" type="email"></input>
             </div>
-            <div>
-              <button className={classes.button}>Send</button>
-            </div>
+            <Button>Send</Button>
           </form>
         </div>
       </div>

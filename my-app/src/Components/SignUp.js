@@ -4,6 +4,7 @@ import CheckboxWithAnimation from "./Checkbox";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import Button from "../UI/Button";
 
 const SignUp = () => {
     const [isChecked, setIsChecked] = useState(false);
@@ -83,11 +84,7 @@ const SignUp = () => {
               
             </form>
 
-            <div>
-              <button className={classes.button}>
-                Register
-              </button>
-            </div>
+           <Button>Register</Button>
             <div className={classes.bottomtext}>
              <Link className={classes.link} to="/">
               <h5>

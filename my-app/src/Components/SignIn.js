@@ -4,6 +4,7 @@ import classes from "./SignIn.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import Button from "../UI/Button";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -45,9 +46,7 @@ const SignIn = () => {
               </div>
             </form>
 
-            <div>
-              <button className={classes.button}>Sign-in</button>
-            </div>
+           <Button>Sign-In</Button>
             <div className={classes.bottomtext}>
               <Link className={classes.link} to="/signup">
                 <h5>
