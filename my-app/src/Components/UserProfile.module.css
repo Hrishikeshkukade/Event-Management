@@ -1,0 +1,26 @@
+.header{
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 10%;
+    align-items: right;
+    
+}
+.settings{
+    margin-right: -120px;
+    padding-left: 2%;
+    cursor: pointer;
+}
+.home{
+    cursor: pointer;
+}
+.icon{
+    color: #909090;
+}
+.label{
+    cursor: pointer;
+    color: #909090;
+}
+.active{
+    color: #4B0082;
+    text-decoration: none;
+}

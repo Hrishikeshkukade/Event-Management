@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import classes from "./SignIn.module.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Button from "../UI/Button";
-import Input from "../UI/Input";
+import Input from "../UI/Input"; 
+import {  signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,17 +16,37 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [url, setUrl] = useState(""); 
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-  
+  const history = useHistory();
+
+ 
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      setUrl(uid);
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
     if (!emailRegex.test(email)) {
       setEmailError("Please enter a valid email address.");
     }
   }
+
+
   const passwordChangeHandler = (e) => {
     setPassword(e.target.value);
   }
@@ -42,9 +65,22 @@ const SignIn = () => {
       setPasswordError("Please enter a password.");
     }
     
+    signInWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        const user = res.user;
+       
+        console.log(user);
+        history.push(`/profile/${url}`)
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+
+
     console.log(email, password)
     setEmail("");
     setPassword("");
+   
   }
 
 
