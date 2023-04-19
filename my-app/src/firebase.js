@@ -1,6 +1,9 @@
 // Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
+import 'firebase/storage';
+import { getStorage, ref } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,5 +20,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth= getAuth();
-
-export {app, auth};
+const storage = getStorage(app);
+const storageRef = ref(storage, 'images/mountains.jpg');
+const mountainsRef = ref(storage, 'mountains.jpg');
+const mountainImagesRef = ref(storage, 'images/mountains.jpg');
+// mountainsRef.name === mountainImagesRef.name;           // true
+// mountainsRef.fullPath === mountainImagesRef.fullPath;   // false 
+export {app, auth, storage, mountainsRef, mountainImagesRef, storageRef};

@@ -1,0 +1,37 @@
+.header{
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 13%;
+    margin-top: -8px;
+    margin-left: -10px;
+    width: auto;
+    align-items: right;
+    background-color: #4B0082;
+}
+.settings{
+    margin-right: -140px;
+    margin-top: -4px;
+    cursor: pointer;
+}
+.home{
+    cursor: pointer;
+    
+}
+.icon{
+    color: #909090;
+    padding-top: 30%;
+}
+.label{
+    cursor: pointer;
+    color: #909090;
+}
+.active{
+   
+    text-decoration: none;
+}
+.active .icon{
+    color: #ffff;
+}
+.active label{
+    color: #ffff;
+}

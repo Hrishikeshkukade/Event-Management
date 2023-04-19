@@ -4,6 +4,7 @@ import SignIn from "./Components/SignIn";
 import UserProfile from "./Components/UserProfile";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ForgotPassword from "./Components/ForgotPassword";
+import Settings from "./Components/Settings";
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <UserProfile />  
+          </Route>
+          <Route path="/settings">
+            <Settings />
           </Route>
         </Switch>
       </Router>
