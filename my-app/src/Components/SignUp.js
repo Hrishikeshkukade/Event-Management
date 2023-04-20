@@ -8,6 +8,8 @@ import Button from "../UI/Button";
 import Input from "../UI/Input";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore"; 
 
 const SignUp = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -57,7 +59,7 @@ const SignUp = () => {
       setMobileNumberError("Please enter a valid mobile number.");
     }
   };
-
+  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -83,7 +85,7 @@ const SignUp = () => {
       setMobileNumberError("Please enter a mobile number.");
     }
 
-    createUserWithEmailAndPassword(auth, email, password)
+     createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
         const user = res.user;
         updateProfile(user, {
@@ -93,11 +95,18 @@ const SignUp = () => {
         })
         console.log(user);
         history.push("/profile")
+         const docRef =  addDoc(collection(db, "users"), {
+          uid: user.uid,
+          name: name,
+          email: user.email,
+          mobileNumber: mobileNumber,
+        });
+        console.log("Document written with ID: ", docRef.id);
       })
       .catch((err) => {
         alert(err.message);
       });
-
+    
     setName("");
     setEmail("");
     setPassword("");

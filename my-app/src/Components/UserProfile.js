@@ -1,9 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import classes from "./UserProfile.module.css";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {  getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
 import Header from "../UI/Header";
 import { storage } from "../firebase";
+import { FirebaseApp } from "firebase/app";
 
 
 const UserProfile = () => {
@@ -27,34 +28,18 @@ const UserProfile = () => {
       }
     });
   });
-  const handleChange = (event) => {
-    const imageFile = event.target.files[0];
-    setImage(imageFile);
-  };
-  const handleUpload = () => {
-    const storageRef = storage.ref();
-    const imageRef = storageRef.child(`profilePictures/${image.name}`);
-    const uploadTask = imageRef.put(image);
-
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        // Handle progress if needed
-        console.log(snapshot);
-      },
-      (error) => {
-        // Handle error if any
-        console.error(error);
-      },
-      () => {
-        // Handle success
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          // Use downloadURL to update user's profile picture
-          console.log('Profile picture URL:', downloadURL);
-          // Add your logic here to update user's profile picture URL in your database or anywhere else
-        });
-      }
-    );
+  async function handleFileInputChange  (e)  {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+      const file = e.target.files[0];
+      const storageRef = storage().ref();
+      const fileRef = storageRef.child(`profile_images/${file.name}`);
+      await fileRef.put(file);
+      const downloadURL = await fileRef.getDownloadURL();
+      // You can now use the downloadURL to store the profile image URL in your database or use it in your UI
+      console.log('File uploaded successfully:', downloadURL);
+    }
+  }
   // useEffect(() => {
   //   auth.onAuthStateChanged((user) => {
   //     if(user){
@@ -62,7 +47,7 @@ const UserProfile = () => {
   //     }else setUserName("");
   //   })
   // })
-   }
+  
   
   return (
     <div>
@@ -73,10 +58,10 @@ const UserProfile = () => {
       
     </div>
     
-      <div>
-      <h2>Update Profile Picture</h2>
-      <input onChange={handleChange} type="file"  />
-      <button onClick={handleUpload}>Upload</button>
+      <div className={classes.profile}>
+       
+       <input onChange={handleFileInputChange} type="file"  />
+       <button>Upload</button> 
     </div>
     </div>
   );
