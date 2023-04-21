@@ -4,7 +4,7 @@ const Input = (props) => {
   return (
     <div className={classes.input}>
       
-      <input required onChange={props.onChange} value={props.value} placeholder={props.placeholder} type={props.type}></input>
+      <input  onChange={props.onChange} value={props.value} placeholder={props.placeholder} type={props.type}></input>
     </div>
   );
 };

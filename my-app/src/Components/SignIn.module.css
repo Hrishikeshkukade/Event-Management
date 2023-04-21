@@ -243,30 +243,42 @@
   /* Styles for mobile screens */
   @media screen and (max-width: 500px) {
     .container {
-      width: 90%;
+      width: 250%;
+      margin-left: -145px;  
     }
     
     .info {
       font-size: 10px;
     }
-  
+    .email h3{
+        margin-left: 20px;
+    }
+    .password h3{
+        margin-left: 20px;
+    }
     .button {
       font-size: 10px;
     }
     .icon{
-      margin-left: 150px;
+      margin-left: 430px;
+    }
+    .link h6{
+      text-align: right;
+      margin-right: 22px;
+       padding-top: 20px;
     }
   }
   /* Styles for iPhone SE */
-@media screen and (max-width: 375px)  {
+@media screen and (max-width: 390px)  {
     .signin{
-        margin-right: 440px;
+       margin-left: 140px;
         font-size: 10px;
+        padding-top: 0%;
     }
     .container {
-      width: 10%;
+      width: 0%;
     }
-  
+    
     .info {
       font-size: 18px;
     }
@@ -277,4 +289,16 @@
     .icon{
         margin-right: 240px;
     }
+    .link{
+        margin-right: 140px;
+    }
   }
+  @media only screen 
+  and (device-width: 2340px) 
+  and (device-height: 1080px)
+  and (-webkit-device-pixel-ratio: 2.375)
+  and (orientation: landscape) {
+  .signin{
+    width: 500%;
+  }
+}

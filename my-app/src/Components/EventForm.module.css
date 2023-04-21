@@ -81,3 +81,29 @@
     padding-top: 10px;
     padding-bottom: 12px;
 }
+.custom-datepicker-container {
+    width: 100px; /* Set the desired width */
+  }
+  
+  .custom-datepicker-input {
+    height: 40px; /* Set the desired height */
+  }
+  .datepickericon {
+    position: absolute;
+    top: 50%; /* Use relative unit for vertical positioning */
+    right: 5%; /* Use relative unit for horizontal positioning */
+    transform: translateY(-50%);
+    color: #FC8EAC; /* Set the desired color for the icon */
+    cursor: pointer;
+    text-align: center;
+  }
+  .selected {
+    background-color: red; /* Change the background color to desired color */
+    color: white; /* Change the text color to desired color */
+  }
+  
+  
+  
+  
+  
+  

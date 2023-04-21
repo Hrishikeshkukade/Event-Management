@@ -41,9 +41,7 @@ const SignIn = () => {
 
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
-    if (!emailRegex.test(email)) {
-      setEmailError("Please enter a valid email address.");
-    }
+    
   }
 
 
@@ -64,7 +62,9 @@ const SignIn = () => {
     if (password.trim() === "") {
       setPasswordError("Please enter a password.");
     }
-    
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address.");
+    }
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         const user = res.user;

@@ -11,11 +11,13 @@
   border-radius: 4px;
   margin-right: 8px;
   cursor: pointer;
+  
 }
 .checkbox-container {
   display: flex;
   margin-left: 20px;
   padding-top: 12px;
+  color: #4B0082;
 }
 
 
