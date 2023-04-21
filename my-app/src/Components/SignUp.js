@@ -7,7 +7,7 @@ import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore"; 
 
@@ -24,6 +24,7 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [mobileNumberError, setMobileNumberError] = useState("");
+  const [url, setUrl] = useState("");
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const mobileNumberRegex = /^[0-9]{10}$/;
   
@@ -63,6 +64,18 @@ const SignUp = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      setUrl(uid);
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
   async function registerHandler(e) {
     e.preventDefault();
 
@@ -94,7 +107,7 @@ const SignUp = () => {
           
         })
         console.log(user);
-        history.push("/profile")
+        history.push(`/profile/${url}`)
          const docRef =  addDoc(collection(db, "users"), {
           uid: user.uid,
           name: name,

@@ -3,7 +3,7 @@ import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 import 'firebase/storage';
-import { getStorage, ref } from "firebase/storage";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -35,3 +35,10 @@ console.log(storageRef.fullPath);       // "images/mountains.jpg"
 console.log(mountainsRef.fullPath);     // "mountains.jpg"
 console.log(mountainImagesRef.fullPath);
 export {app, auth, storage, mountainsRef, mountainImagesRef, storageRef, db};
+
+export async function upload(file, user) {
+  const fileRef = ref(storage, user.uid + ".png")
+
+  const snapshot = await uploadBytes(fileRef, file)
+  alert("Uploaded file!")
+}

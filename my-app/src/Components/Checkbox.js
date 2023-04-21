@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Checkbox.css'; // Import the CSS file for the styles
 
 
-const Checkbox = () => {
+const Checkbox = (props) => {
   const [checked, setChecked] = useState(false);
 
   const handleCheckboxChange = (event) => {
@@ -18,7 +18,7 @@ const Checkbox = () => {
         onChange={handleCheckboxChange}
         className={checked ? 'checkbox-checked' : 'checkbox-unchecked'}
       />
-      <label className='checkbox-label'>Check me!</label>
+      <label className='checkbox-label'>{props.children}</label>
     </div>
   );
 };
