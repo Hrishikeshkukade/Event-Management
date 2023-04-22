@@ -13,49 +13,43 @@ import "react-time-picker/dist/TimePicker.css";
 const EventForm = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentTime, setCurrentTime] = useState("");
-  const [error, setError] = useState("");
-  const [formData, setFormData] = useState({
-    eventName: "",
-    eventDescription: "",
-    eventLocation: "",
-    phone: "",
-    eventFees: "",
-    eventMeal: "",
-    eventAccomodation: "",
-  });
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      
-      [name]: value,
-      
-    });
-    console.log(event.target.value)
-    setError({
-      ...error,
-      [name]: "",
-    });
-  };
+ 
+ 
 
   // states to handle inputs
-  // const [eventName, setEventName] = useState("");
-  // const [eventDescription, setEventDescription] = useState("");
-  // // for event date
-  // const [eventLocation, setEventLocation] = useState("");
-  // const [eventFees, setEventFees] = useState("");
-  // const [eventMeal, setEventMeal] = useState("");
-  // const [eventAccomodation, setEventAccomodation] = useState("");
+  const [eventName, setEventName] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  // for event date
+  const [eventLocation, setEventLocation] = useState("");
+  const [eventFees, setEventFees] = useState("");
+  const [eventMeal, setEventMeal] = useState("");
+  const [eventAccomodation, setEventAccomodation] = useState("");
 
-  // const [eventNameError, setEventNameError] = useState("");
-  // const [eventDescriptionError, setEventDescriptionError] = useState("");
-  // // for event date
-  // const [selectedDateError, setSelectedDateError] = useState(new Date());
-  // const [currentTimeError, setCurrentTimeError] = useState('');
-  // const [eventLocation, setEventLocation] = useState("");
-  // const [eventFees, setEventFees] = useState("");
-  // const [eventMeal, setEventMeal] = useState("");
-  // const [eventAccomodation, setEventAccomodation] = useState("");
+  // for validation
+  const [eventNameError, setEventNameError] = useState("");
+  const [eventDescriptionError, setEventDescriptionError] = useState("");
+  const [eventLocationError, setEventLocationError] = useState("");
+  const [eventFeesError, setEventFeesError] = useState("");
+ 
+  const eventNameChangeHandler = (e) => {
+    setEventName(e.target.value);
+  }
+  const eventDescriptionChangeHandler = (e) => {
+    setEventDescription(e.target.value);
+  }
+  const eventLocationChangeHandler = (e) => {
+    setEventLocation(e.target.value);
+  }
+  const eventFeesChangeHandler = (e) => {
+    setEventFees(e.target.value);
+  }
+  const eventMealChangeHandler = (e) => {
+    setEventMeal(e.target.value);
+  }
+  const eventAccomodationChangeHandler = (e) => {
+    setEventAccomodation(e.target.value);
+  }
+  
   // Logic for current time
   const getCurrentTime = () => {
     const now = new Date();
@@ -71,34 +65,46 @@ const EventForm = () => {
     getCurrentTime();
   });
 
+  // To handle submission of form
   const handleSubmit = (event) => {
     event.preventDefault();
-    let newError = {};
+   
 
-    if (formData.eventName === "") {
-      newError.eventName = "Event name cannot be empty.";
+    if (eventName.trim() === "") {
+       setEventNameError("Event name cannot be empty.");
+    }else{
+      setEventNameError("");
     }
 
-    if (formData.eventDescription=== "") {
-      newError.eventDescription = "Event description cannot be empty.";
+    if (eventDescription.trim() === "") {
+      setEventDescriptionError("Event Description cannot be empty.");
+    }else{
+      setEventDescriptionError("");
     }
 
-    if (selectedDate === "") {
-      newError.selectedDate = "Event date cannot be empty.";
-    } 
-
-    if (formData.currentTime === "") {
-      newError.currentTime = "Event time cannot be empty.";
+    if (eventLocation.trim() === "") {
+      setEventLocationError("Event location cannot be empty.");
+    }else{
+      setEventLocationError("");
+    }
+    if (eventFees.trim() === "") {
+       setEventFeesError("Event Fees cannot be empty.");
+    }else{
+      setEventFeesError("");
     }
 
-    if (Object.keys(newError).length > 0) {
-      // If there are errors, set the state with the new errors
-      setError(newError);
-    } else {
-      // Submit form data
-      setError({});
-      // ... additional logic
-    }
+    // if (Object.keys(newError).length > 0) {
+    //   // If there are errors, set the state with the new errors
+    //   setError(newError);
+    // } else {
+    //   // Submit form data
+    //   setError({});
+    //   // ... additional logic
+    // }
+    setEventName("");
+    setEventDescription("");
+    setEventLocation("");
+    setEventFees("");
   };
 
   return (
@@ -112,23 +118,23 @@ const EventForm = () => {
             <div className={classes.email}>
               <h3>Event Title</h3>
               <Input
-                value={formData.eventName}
-                onChange={handleInputChange}
+                value={eventName}
+                onChange={eventNameChangeHandler}
                 required
                 placeholder="Wedding"
                 type="text"
               ></Input>
-               {error.eventName && <p className={classes.error}>{error.eventName}</p>} 
+               {eventNameError && <p className={classes.error}>{eventNameError}</p>} 
             </div>
             <div className={classes.password}>
               <h3>Event Description</h3>
               <Input
-                  onChange={handleInputChange}
+                  onChange={eventDescriptionChangeHandler}
                 placeholder="Add a informative description..."
                 type="text"
-                  value={formData.eventDescription}
+                  value={eventDescription}
               ></Input>
-              {error.eventDescription && <p className={classes.error}>{error.eventDescription}</p>} 
+              {eventDescriptionError && <p className={classes.error}>{eventDescriptionError}</p>} 
             </div>
             <div className={classes.password}>
               <h3>Event Date</h3>
@@ -144,36 +150,36 @@ const EventForm = () => {
                  
                   className={classes.datepickericon}
                 /> */}
-                {error.selectedDate && <p className={classes.error}>{error.selectedDate}</p>} 
+               
             </div>
             <div className={classes.password}>
               <h3>Event Time</h3>
               <Input selected={currentTime} onChange ={(e) => {setCurrentTime(e.target.value)}} placeholder="hh:mm" type="time"></Input>
-              {error.currentTime && <p className={classes.error}>{error.currentTime}</p>} 
+             
             </div>
             <div className={classes.password}>
               <h3>Event Location</h3>
               <Input
-                  onChange={handleInputChange}
+                  onChange={eventLocationChangeHandler}
                 placeholder=""
                 type="text"
-                  value={formData.eventLocation}
+                  value={eventLocation}
               ></Input>
-              {error.eventLocation && <p className={classes.error}>{error.eventLocation}</p>} 
+              {eventLocationError && <p className={classes.error}>{eventLocationError}</p>} 
             </div>
            
             <div className={classes.password}>
               <h3>Event Fees</h3>
               <Input
-                  onChange={handleInputChange}
+                  onChange={eventFeesChangeHandler}
                 placeholder="Enter fees in ruppes.."
                 type="text"
-                  value={formData.eventFees}
+                  value={eventFees}
               ></Input>
-              {error.eventFees && <p className={classes.error}>{error.eventFees}</p>} 
+              {eventFeesError && <p className={classes.error}>{eventFeesError}</p>} 
             </div>
-            <Checkbox onChange={handleInputChange} value={formData.eventMeal}>Meal provided by organiser?</Checkbox>
-            <Checkbox onChange={handleInputChange} value={formData.eventAccomodation}>Accomodation provided by organiser?</Checkbox>
+            <Checkbox onChange={eventMealChangeHandler} value={eventMeal}>Meal provided by organiser?</Checkbox>
+            <Checkbox onChange={eventAccomodationChangeHandler} value={eventAccomodation}>Accomodation provided by organiser?</Checkbox>
             <div className={classes.button}>
               <Button>Submit</Button>
             </div>

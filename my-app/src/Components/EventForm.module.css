@@ -101,6 +101,10 @@
     background-color: red; /* Change the background color to desired color */
     color: white; /* Change the text color to desired color */
   }
+  .error{
+    color: #ff3333;
+    margin-right: 200px;
+}
   
   
   
