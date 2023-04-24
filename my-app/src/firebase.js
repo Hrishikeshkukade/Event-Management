@@ -2,6 +2,7 @@
 import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
+import { collection } from "firebase/firestore";
 import 'firebase/storage';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,6 +22,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth= getAuth();
 const db = getFirestore(app);
+
+
+
+
 
 const storage = getStorage(app);
 const storageRef = ref(storage, 'images/mountains.jpg');

@@ -4,18 +4,17 @@ import Input from "../UI/Input";
 import Checkbox from "./Checkbox";
 import Button from "../UI/Button";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { db } from "../firebase";
+import { collection, addDoc, doc } from "firebase/firestore"; 
 // import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const EventForm = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentTime, setCurrentTime] = useState("");
- 
- 
-
   // states to handle inputs
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
@@ -24,13 +23,12 @@ const EventForm = () => {
   const [eventFees, setEventFees] = useState("");
   const [eventMeal, setEventMeal] = useState("");
   const [eventAccomodation, setEventAccomodation] = useState("");
-
   // for validation
   const [eventNameError, setEventNameError] = useState("");
   const [eventDescriptionError, setEventDescriptionError] = useState("");
   const [eventLocationError, setEventLocationError] = useState("");
-  const [eventFeesError, setEventFeesError] = useState("");
- 
+  
+  const [url, setUrl] = useState("");
   const eventNameChangeHandler = (e) => {
     setEventName(e.target.value);
   }
@@ -65,8 +63,25 @@ const EventForm = () => {
     getCurrentTime();
   });
 
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setUrl(uid);
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  },[])// Empty dependency array to ensure the effect runs only once on component mount
+
+
+
   // To handle submission of form
-  const handleSubmit = (event) => {
+   const  handleSubmit = (event) => {
     event.preventDefault();
    
 
@@ -87,11 +102,32 @@ const EventForm = () => {
     }else{
       setEventLocationError("");
     }
-    if (eventFees.trim() === "") {
-       setEventFeesError("Event Fees cannot be empty.");
-    }else{
-      setEventFeesError("");
+    try{
+     const docRef =  addDoc(collection(db, "events"), {
+      uid: url,
+      eventName: eventName,
+      eventDescription: eventDescription,
+      eventDate: selectedDate,
+      eventTime: currentTime,
+      eventLoaction: eventLocation,
+      eventFees: eventFees,
+      eventMeal: eventMeal,
+      eventAccomodation:eventAccomodation,
+    })
+    console.log(docRef.id);
+  }catch(err){
+      console.log(err);
     }
+    
+    
+    setEventName("");
+    setEventDescription("");
+    setEventLocation("");
+    setEventFees("");
+  }
+  // .catch((err) => {
+  //   alert(err.message);
+  // });
 
     // if (Object.keys(newError).length > 0) {
     //   // If there are errors, set the state with the new errors
@@ -101,11 +137,8 @@ const EventForm = () => {
     //   setError({});
     //   // ... additional logic
     // }
-    setEventName("");
-    setEventDescription("");
-    setEventLocation("");
-    setEventFees("");
-  };
+   
+  
 
   return (
     <div className={classes.signin}>
@@ -176,7 +209,7 @@ const EventForm = () => {
                 type="text"
                   value={eventFees}
               ></Input>
-              {eventFeesError && <p className={classes.error}>{eventFeesError}</p>} 
+              
             </div>
             <Checkbox onChange={eventMealChangeHandler} value={eventMeal}>Meal provided by organiser?</Checkbox>
             <Checkbox onChange={eventAccomodationChangeHandler} value={eventAccomodation}>Accomodation provided by organiser?</Checkbox>

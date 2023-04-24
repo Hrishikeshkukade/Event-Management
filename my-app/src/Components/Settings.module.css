@@ -1,0 +1,39 @@
+.settings{
+    margin-top: 140px;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 410px;
+    
+}
+.profile{
+    display: flex;
+    padding: 20px 70px 20px 10px;
+    background-color: #e4e2e2;
+    flex-direction: row;
+    color: #4B0082;
+    text-align: center;
+    /* margin-left: 500px; */
+    flex: 1;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.logout{
+    display: flex;
+    padding: 20px 70px 20px 10px;
+    background-color: #e4e2e2;
+    flex-direction: row;
+    margin-top: 40px;
+    text-align: center;
+    /* margin-left: 500px; */
+    flex: 1;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.icon{
+    font-size: 44px;
+   
+    text-align: right;
+    color:#db154a;
+   
+}

@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import classes from "./SignIn.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -21,26 +21,15 @@ const SignIn = () => {
   const history = useHistory();
 
  
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      setUrl(uid);
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
 
-  const emailChangeHandler = (e) => {
-    setEmail(e.target.value);
+  const emailChangeHandler = (event) => {
+    setEmail(event.target.value);
     
   }
 
@@ -53,6 +42,23 @@ const SignIn = () => {
   //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   //   return emailRegex.test(email);
   // };
+  useEffect(() => {
+    const auth = getAuth();
+    const currentUser = getAuth().currentUser;
+    console.log(currentUser)
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setUrl(uid);
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  },[])
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -75,7 +81,19 @@ const SignIn = () => {
       .catch((err) => {
         alert(err.message);
       });
-
+    // signInWithEmailAndPassword(auth, email, password)
+// .then(async (userCredential) => {
+//   // Set custom claim with additional data
+//   await auth().currentUser.getIdTokenResult(true);
+//   await auth().currentUser.customClaims.set({
+//     customData: 'additional data'
+//   });
+//   history.push(`/profile/${url}`)
+//   // ...
+// })
+// .catch((error) => {
+//   // Handle sign in error
+// });
 
     console.log(email, password)
     setEmail("");
@@ -101,18 +119,20 @@ const SignIn = () => {
             <form onSubmit={handleSubmit} className={classes.form}>
               <div className={classes.email}>
                 <h3>Email</h3>
-                <Input
+                <input
+                  id="email"
                   required
                   onChange={emailChangeHandler}
                   placeholder="abc@gmail.com"
                   type="email"
                   value={email}
-                ></Input>
+                ></input>
                 {emailError && <p className={classes.error}>{emailError}</p>}
               </div>
               <div className={classes.password}>
                 <h3>Password</h3>
                 <Input
+                  id="pass"
                   onChange={passwordChangeHandler}
                   placeholder="Enter a password..."
                   type={showPassword ? "text" : "password"}
