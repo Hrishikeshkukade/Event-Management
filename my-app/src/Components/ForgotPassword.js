@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,  } from "react";
 import classes from "./ForgotPassword.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
-import { getAuth, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 const ForgotPassword = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -29,21 +29,7 @@ const ForgotPassword = () => {
   }
 
   
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       // User is signed in, see docs for a list of available properties
-  //       // https://firebase.google.com/docs/reference/js/firebase.User
 
-        
-  //       setEmail(email);
-  //       console.log(email);
-  //     } else {
-  //       // User is signed out
-  //       // ...
-  //     }
-  //   });
-  // }, []);
 
   const clickHandler = (e) => {
     e.preventDefault();
