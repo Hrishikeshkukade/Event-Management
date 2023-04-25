@@ -24,7 +24,7 @@ const Header = () => {
         // ...
       }
     });
-    const link = `/profile/${url}`;
+    const link  = `/profile/${url}`;
     return(
         <header className={classes.header}>
       <div className={classes.home}>

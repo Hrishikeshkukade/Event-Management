@@ -8,6 +8,7 @@ import Input from "../UI/Input";
 import {  signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
+import GoogleSignInButton from "../UI/GoogleSignInButton";
 
 
 const SignIn = () => {
@@ -151,7 +152,11 @@ const SignIn = () => {
                   <h6>Forgot Password</h6>
                 </Link>
               </div>
+              
             <Button type="submit">Sign-In</Button>
+            <p>OR</p>
+            <GoogleSignInButton />
+        
             </form>
 
             <div className={classes.bottomtext}>
