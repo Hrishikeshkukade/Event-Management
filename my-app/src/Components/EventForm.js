@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "../firebase";
-import { collection, addDoc, doc } from "firebase/firestore"; 
+import { collection, addDoc } from "firebase/firestore"; 
 // import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -21,7 +21,7 @@ const EventForm = () => {
   // for event date
   const [eventLocation, setEventLocation] = useState("");
   const [eventFees, setEventFees] = useState("");
-  const [eventMeal, setEventMeal] = useState("");
+  const [eventMeal, setEventMeal] = useState(false);
   const [eventAccomodation, setEventAccomodation] = useState("");
   // for validation
   const [eventNameError, setEventNameError] = useState("");
@@ -43,6 +43,7 @@ const EventForm = () => {
   }
   const eventMealChangeHandler = (e) => {
     setEventMeal(e.target.value);
+    console.log(eventMeal)
   }
   const eventAccomodationChangeHandler = (e) => {
     setEventAccomodation(e.target.value);
@@ -211,7 +212,7 @@ const EventForm = () => {
               ></Input>
               
             </div>
-            <Checkbox onChange={eventMealChangeHandler} value={eventMeal}>Meal provided by organiser?</Checkbox>
+            <Checkbox value={eventMeal} onChange={eventMealChangeHandler}>Meal provided by organiser?</Checkbox>
             <Checkbox onChange={eventAccomodationChangeHandler} value={eventAccomodation}>Accomodation provided by organiser?</Checkbox>
             <div className={classes.button}>
               <Button>Submit</Button>

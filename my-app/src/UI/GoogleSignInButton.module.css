@@ -1,27 +1,25 @@
 /* Google Sign-in Button */
 .button {
     display: inline-block;
-    background-color: #ffffff;
-    color: #757575;
-    border: 1px solid #757575;
-    border-radius: 4px;
+    background-color: #4B0082;
+    color: #ffff;
+    border: 1px solid #4B0082;
+    border-radius: 10px;
     font-size: 14px;
-    font-weight: bold;
+    width: 51%;
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-   
+    font-family: Nunito;
   }
   
-  .button:hover {
-    background-color: #f5f5f5;
-  }
+ 
   
   .button:focus {
     outline: none;
   }
   
   .button img {
-    vertical-align: middle;
+    height: 15px;
     margin-right: 10px;
   }

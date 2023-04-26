@@ -55,10 +55,7 @@ const GoogleSignInButton = () => {
 
   return (
     <button onClick={signinHandler} className={classes.button}>
-      <img 
-      src="/public/Google Signin"
-      alt="G"
-      />
+      <img  src="https://user-images.githubusercontent.com/1770056/58111071-c2941c80-7bbe-11e9-8cac-1c3202dffb26.png" alt="G"></img>
       Sign in with Google
     </button>
   );

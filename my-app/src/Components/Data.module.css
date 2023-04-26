@@ -1,0 +1,60 @@
+/* .data{
+  width: 25%;
+  
+  background-color: pink;  
+  margin-left: 40%;
+  border-radius: 10px;
+}
+.data h5{
+    text-align: left;
+    padding-left: 4%;
+    padding-top: 4%;
+    color: black
+}
+.data h4{
+    text-align: left;
+    padding-left: 4%;
+    padding-bottom: 10%;
+}
+.icon{
+    position: relative;
+    margin-left: auto; /* Center the icon horizontally */
+    /* margin-right: 0; Remove right margin to make it fit with data container */
+    /* display: flex;
+    flex-direction: column;
+} */
+
+.event{
+    margin-right: 130px;
+} 
+.data {
+    width: 25%;
+    background-color: pink;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    justify-content: space-between; /* Add justify-content to space items */
+  }
+  
+  .data h5 {
+    text-align: left;
+    color: black;
+  }
+  
+  .icon {
+    margin-left: 1rem; /* Add margin between event date and icon */
+    height: 30px;
+    cursor: pointer;
+  }
+   .length{
+    color: black;
+    background-color: #e4e2e2;
+   width: 20%;
+   margin-left: 39%;
+   padding: 20px 20px 20px 20px;
+   border-radius: 10px;
+}
+  

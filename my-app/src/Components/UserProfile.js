@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Header from "../UI/Header";
 import Button from "../UI/Button";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import Data from "./Data";
 // import { getDocs,  where, query } from "firebase/firestore";
 import "firebase/firestore";
 // import { db } from "../firebase";
@@ -20,7 +21,7 @@ import "firebase/firestore";
 const UserProfile = () => {
   const [userName, setUserName] = useState("");
   const [url, setUrl] = useState("");
-  const [userData, setUserData] = useState([]);
+  
   // const [image, setImage] = useState(null);
   // const [photoUrl, setPhotoUrl] = useState();
 
@@ -138,33 +139,28 @@ const UserProfile = () => {
 
   return (
     <div>
-      <Header />
+    <Header />
+   
       <div className={classes.info}>
         <h4>Hello</h4>
         <h1>{userName}</h1>
       </div>
       <div className={classes.data}>
-        {userData.map((item,id) => (
-          <div key={id}>
-            {/* Render individual data from item */}
-            <p>{item.eventName}</p>
-            <p>{item.eventDate}</p>
-            {/* Render other data as needed */}
-          </div>
-        ))}
+       <Data uid={url}/>
       </div>
       <div>
         <NavLink to={`/${url}/events`} activeClassName={classes.active}>
           <Button className={classes.button}>Add Events</Button>
         </NavLink>
       </div>
+      
       {/* <div className={classes.profile}>
        
        <input type="file"  onChange={handleFileInputChange}  />
        <button onClick={handleUpload}>Upload</button> 
        <img  src={photoUrl} alt="noimage"></img>
-    </div> */}
-    </div>
+      </div> */}
+      </div>
   );
 };
 

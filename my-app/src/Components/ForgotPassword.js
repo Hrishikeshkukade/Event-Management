@@ -16,7 +16,9 @@ const ForgotPassword = () => {
 
   const handleForgotPassword =  (e) => {
     e.preventDefault();
-    sendPasswordResetEmail(auth, email)
+    sendPasswordResetEmail(auth, email, {
+      url: "http://localhost:3000"
+    })
     
   .then(() => {
     // Password reset email sent!

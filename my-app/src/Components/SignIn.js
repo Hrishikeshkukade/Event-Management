@@ -76,8 +76,8 @@ const SignIn = () => {
       .then((res) => {
         const user = res.user;
        
-        console.log(user);
         history.push(`/profile/${url}`)
+        console.log(user);
       })
       .catch((err) => {
         alert(err.message);
