@@ -6,6 +6,7 @@ import Header from "../UI/Header";
 import Button from "../UI/Button";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import Data from "./Data";
+// import ProfilePicture from "./ProfilePicture";
 // import { getDocs,  where, query } from "firebase/firestore";
 import "firebase/firestore";
 // import { db } from "../firebase";
@@ -21,7 +22,7 @@ import "firebase/firestore";
 const UserProfile = () => {
   const [userName, setUserName] = useState("");
   const [url, setUrl] = useState("");
-  
+  const [email,setEmail] = useState("");
   // const [image, setImage] = useState(null);
   // const [photoUrl, setPhotoUrl] = useState();
 
@@ -37,8 +38,10 @@ const UserProfile = () => {
 
         const displayName = user.displayName;
         const uid = user.uid;
+        const email = user.email;
         setUserName(displayName);
         setUrl(uid);
+        setEmail(email);
         // const Firestore = getFirestore();
         // const data = collection(Firestore, "events");
 
@@ -140,7 +143,7 @@ const UserProfile = () => {
   return (
     <div>
     <Header />
-   
+    {/* <ProfilePicture user={email}/> */}
       <div className={classes.info}>
         <h4>Hello</h4>
         <h1>{userName}</h1>

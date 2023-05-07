@@ -25,6 +25,7 @@ const SignUp = () => {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [mobileNumberError, setMobileNumberError] = useState("");
   const [url, setUrl] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const mobileNumberRegex = /^[0-9]{10}$/;
   
@@ -70,7 +71,9 @@ const SignUp = () => {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
+      const photoURL = user.photoURL
       setUrl(uid);
+      setPhotoUrl(photoURL)
     } else {
       // User is signed out
       // ...
@@ -104,15 +107,17 @@ const SignUp = () => {
         updateProfile(user, {
           displayName: name,
           phoneNumber: mobileNumber,
+          photoURL: photoUrl
           
         })
         console.log(user);
         history.push(`/profile/${url}`)
-         const docRef =  addDoc(collection(db, "users"), {
+         const docRef =  addDoc(collection(db, "users", `${url}`), {
           uid: user.uid,
           name: name,
           email: user.email,
           mobileNumber: mobileNumber,
+          photoUrl: user.photoURL
         });
         console.log("Document written with ID: ", docRef.id);
       })

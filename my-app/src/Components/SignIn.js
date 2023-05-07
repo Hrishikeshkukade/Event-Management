@@ -1,15 +1,16 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./SignIn.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// import Button from "../UI/Button";
 import Button from "../UI/Button";
-import Input from "../UI/Input"; 
-import {  signInWithEmailAndPassword } from "firebase/auth";
+import Input from "../UI/Input";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import GoogleSignInButton from "../UI/GoogleSignInButton";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,27 +18,21 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [url, setUrl] = useState(""); 
+  const [url, setUrl] = useState("");
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const history = useHistory();
-
- 
-  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-
   const emailChangeHandler = (event) => {
     setEmail(event.target.value);
-    
-  }
-
+  };
 
   const passwordChangeHandler = (e) => {
     setPassword(e.target.value);
-  }
+  };
   // const isValidEmail = (email) => {
   //   // Simple email validation using regular expression
   //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -46,7 +41,7 @@ const SignIn = () => {
   useEffect(() => {
     const auth = getAuth();
     const currentUser = getAuth().currentUser;
-    console.log(currentUser)
+    console.log(currentUser);
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -58,8 +53,8 @@ const SignIn = () => {
         // ...
       }
     });
-  },[])
- 
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -75,38 +70,32 @@ const SignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         const user = res.user;
-       
-        history.push(`/profile/${url}`)
+
+        history.push(`/profile/${url}`);
         console.log(user);
       })
       .catch((err) => {
         alert(err.message);
       });
     // signInWithEmailAndPassword(auth, email, password)
-// .then(async (userCredential) => {
-//   // Set custom claim with additional data
-//   await auth().currentUser.getIdTokenResult(true);
-//   await auth().currentUser.customClaims.set({
-//     customData: 'additional data'
-//   });
-//   history.push(`/profile/${url}`)
-//   // ...
-// })
-// .catch((error) => {
-//   // Handle sign in error
-// });
+    // .then(async (userCredential) => {
+    //   // Set custom claim with additional data
+    //   await auth().currentUser.getIdTokenResult(true);
+    //   await auth().currentUser.customClaims.set({
+    //     customData: 'additional data'
+    //   });
+    //   history.push(`/profile/${url}`)
+    //   // ...
+    // })
+    // .catch((error) => {
+    //   // Handle sign in error
+    // });
 
-    console.log(email, password)
+    console.log(email, password);
     setEmail("");
     setPassword("");
-   
-  }
+  };
 
-
-   
-
-   
- 
   return (
     <React.Fragment>
       <div className={classes.signin}>
@@ -139,24 +128,25 @@ const SignIn = () => {
                   type={showPassword ? "text" : "password"}
                   value={password}
                 ></Input>
-                
+
                 <FontAwesomeIcon
                   icon={showPassword ? faEyeSlash : faEye}
                   onClick={togglePasswordVisibility}
                   className={classes.icon}
                 />
-                 {passwordError && <p className={classes.error}>{passwordError}</p>}
+                {passwordError && (
+                  <p className={classes.error}>{passwordError}</p>
+                )}
               </div>
               <div className={classes.text}>
                 <Link className={classes.link} to="/fp">
                   <h6>Forgot Password</h6>
                 </Link>
               </div>
-              
-            <Button type="submit">Sign-In</Button>
-            <p>OR</p>
-            <GoogleSignInButton />
-        
+
+              <Button type="submit">Sign-In</Button>
+              <p>OR</p>
+              <GoogleSignInButton />
             </form>
 
             <div className={classes.bottomtext}>

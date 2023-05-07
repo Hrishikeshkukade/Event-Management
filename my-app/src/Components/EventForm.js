@@ -114,6 +114,7 @@ const EventForm = () => {
       eventFees: eventFees,
       eventMeal: eventMeal,
       eventAccomodation:eventAccomodation,
+      id:Math.random()
     })
     console.log(docRef.id);
   }catch(err){

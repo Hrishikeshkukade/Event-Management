@@ -1,29 +1,3 @@
-/* .data{
-  width: 25%;
-  
-  background-color: pink;  
-  margin-left: 40%;
-  border-radius: 10px;
-}
-.data h5{
-    text-align: left;
-    padding-left: 4%;
-    padding-top: 4%;
-    color: black
-}
-.data h4{
-    text-align: left;
-    padding-left: 4%;
-    padding-bottom: 10%;
-}
-.icon{
-    position: relative;
-    margin-left: auto; /* Center the icon horizontally */
-    /* margin-right: 0; Remove right margin to make it fit with data container */
-    /* display: flex;
-    flex-direction: column;
-} */
-
 .event{
     margin-right: 130px;
 } 

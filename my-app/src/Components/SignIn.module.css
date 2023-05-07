@@ -17,7 +17,7 @@
 }
 
 .info {
-    font-family: sans-serif;
+    
     font-weight: 100;
     background-color: #4B0082;
     border-radius: 10px;
@@ -268,37 +268,5 @@
        padding-top: 20px;
     }
   }
-  /* Styles for iPhone SE */
-@media screen and (max-width: 390px)  {
-    .signin{
-       margin-left: 140px;
-        font-size: 10px;
-        padding-top: 0%;
-    }
-    .container {
-      width: 0%;
-    }
-    
-    .info {
-      font-size: 18px;
-    }
-  
-    .button {
-      font-size: 12px;
-    }
-    .icon{
-        margin-right: 240px;
-    }
-    .link{
-        margin-right: 140px;
-    }
-  }
-  @media only screen 
-  and (device-width: 2340px) 
-  and (device-height: 1080px)
-  and (-webkit-device-pixel-ratio: 2.375)
-  and (orientation: landscape) {
-  .signin{
-    width: 500%;
-  }
-}
+
+ 

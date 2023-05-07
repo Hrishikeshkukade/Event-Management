@@ -48,7 +48,7 @@ const GoogleSignInButton = () => {
           const credential = GoogleAuthProvider.credentialFromError(error);
           // ...
         });
-      
+       
   
 
     }
