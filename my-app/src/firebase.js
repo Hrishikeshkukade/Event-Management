@@ -10,12 +10,12 @@ import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC-2d-nVmhDb-3LE0QeKRHcuVcLlbKYMJM",
-  authDomain: "event-management-13be9.firebaseapp.com",
-  projectId: "event-management-13be9",
-  storageBucket: "event-management-13be9.appspot.com",
-  messagingSenderId: "907072154803",
-  appId: "1:907072154803:web:e1526da3ddd0d8586454c6"
+  apiKey: "***",
+  authDomain: "***",
+  projectId: "***",
+  storageBucket: "***",
+  messagingSenderId: "***",
+  appId: "***"
 };
 
 // Initialize Firebase
